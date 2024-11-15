@@ -68,27 +68,17 @@ class SmartphoneTradingAgent:
         plt.tight_layout()
         plt.show()
 
+# Simulation Parameters
+average_price = 600
+critical_stock = 10
+min_order = 10
+specific_order = 15
 
-def main():
-    # Get user inputs
-    average_price = float(input("Enter the average price of the smartphone: "))
-    critical_stock = int(input("Enter the critical stock level (e.g., 10): "))
-    min_order = int(input("Enter the minimum order quantity: "))
-    specific_order = int(input("Enter the specific order quantity for favorable prices: "))
-    
-    # Generate price series or allow user to input prices
-    option = input("Do you want to enter custom price series? (yes/no): ").strip().lower()
-    if option == "yes":
-        price_series = list(map(float, input("Enter the price series separated by spaces: ").split()))
-    else:
-        print("Generating random price series...")
-        price_series = np.random.randint(average_price * 0.7, average_price * 1.2, 50)
-        print(f"Generated price series: {price_series}")
+# Simulate a price series with random fluctuations
+np.random.seed(0)
+price_series = np.random.randint(500, 700, 50)
 
-    # Initialize and run the agent
-    agent = SmartphoneTradingAgent(average_price, critical_stock, min_order, specific_order)
-    agent.simulate(price_series)
-    agent.plot_results()
-
-if __name__ == "__main__":
-    main()
+# Initialize and run the agent
+agent = SmartphoneTradingAgent(average_price, critical_stock, min_order, specific_order)
+agent.simulate(price_series)
+agent.plot_results()
